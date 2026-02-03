@@ -1,7 +1,7 @@
 // Valentine page script
 
 /* TYPEWRITER EFFECT */
-const text = "Hey Hadija… I made this just for you ❤️";
+const text = "Hey Hadija… I made this just for you ❤️"; 
 let index = 0;
 const speed = 70;
 const typewriter = document.getElementById("typewriter");
