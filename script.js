@@ -78,23 +78,3 @@ yesBtn.addEventListener("click", () => {
   launchConfetti();
   popup.classList.remove("hidden"); // show popup ONLY after Yes
 });
-
-/* CLOSE POPUP */
-closePopup.addEventListener("click", () => {
-  popup.classList.add("hidden");
-});
-
-/* CONFETTI EFFECT */
-function launchConfetti() {
-  const duration = 2000;
-  const end = Date.now() + duration;
-
-  (function frame() {
-    confetti({ particleCount: 6, angle: 60, spread: 55, origin: { x: 0 } });
-    confetti({ particleCount: 6, angle: 120, spread: 55, origin: { x: 1 } });
-
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
-    }
-  })();
-}
