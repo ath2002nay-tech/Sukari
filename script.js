@@ -1,8 +1,10 @@
+// Valentine page script
+
 /* TYPEWRITER EFFECT */
 const text = "Hey Hadija… I made this just for you ❤️";
 let index = 0;
 const speed = 70;
-const typewriter = document.getElementById("typewriter"); 
+const typewriter = document.getElementById("typewriter");
 
 function typeEffect() {
   if (index < text.length) {
@@ -67,12 +69,19 @@ noBtn.addEventListener("mouseover", () => {
 /* YES BUTTON ACTION */
 const yesBtn = document.getElementById("yesBtn");
 const afterYesMessage = document.getElementById("afterYesMessage");
+const popup = document.getElementById("popup");
+const closePopup = document.getElementById("closePopup");
 
 yesBtn.addEventListener("click", () => {
   afterYesMessage.textContent = "I already knew your answer 😌❤️ You just made me the happiest person alive.";
   afterYesMessage.classList.remove("hidden");
   launchConfetti();
-  showPopup();
+  popup.classList.remove("hidden"); // show popup ONLY after Yes
+});
+
+/* CLOSE POPUP */
+closePopup.addEventListener("click", () => {
+  popup.classList.add("hidden");
 });
 
 /* CONFETTI EFFECT */
@@ -89,15 +98,3 @@ function launchConfetti() {
     }
   })();
 }
-
-/* POPUP CONTROL */
-const popup = document.getElementById("popup");
-const closePopup = document.getElementById("closePopup");
-
-function showPopup() {
-  popup.classList.remove("hidden");
-}
-
-closePopup.addEventListener("click", () => {
-  popup.classList.add("hidden");
-});
