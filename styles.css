@@ -1,227 +1,92 @@
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; 
-}
- 
-/* BODY */
-body {
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  background: url('assets/hadija.jpeg') no-repeat center center fixed;
-  background-size: cover;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+// Valentine page script
 
-/* DARK OVERLAY */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 0;
-}
+/* TYPEWRITER EFFECT */
+const text = "Hey Hadija… I made this just for you ❤️";
+let index = 0;
+const speed = 70;
+const typewriter = document.getElementById("typewriter");
 
-/* HEARTS */
-.hearts::before {
-  content: "💖 💕 💗 💓 💘 💝";
-  position: fixed;
-  top: -10%;
-  left: 0;
-  width: 100%;
-  font-size: 2rem;
-  text-align: center;
-  animation: floatHearts 15s linear infinite;
-  opacity: 0.6;
-  z-index: 1;
-}
-
-@keyframes floatHearts {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(120vh); }
-}
-
-/* MAIN CONTENT */
-main {
-  position: relative;
-  z-index: 2;
-  padding: 60px 20px;
-}
-
-/* SECTIONS */
-.section {
-  max-width: 800px;
-  margin: 80px auto;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease;
-}
-
-.section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
-  margin-bottom: 15px;
-}
-
-.subtext {
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-
-/* COUNTDOWN */
-#countdown {
-  font-size: 1.5rem;
-  margin-top: 15px;
-  letter-spacing: 2px;
-}
-
-/* LOVE LETTER */
-.love-letter p {
-  margin: 15px 0;
-  font-size: 1.05rem;
-  line-height: 1.7;
-}
-
-/* REASONS */
-.reason-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.12);
-  padding: 15px;
-  border-radius: 12px;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.18);
-}
-
-/* PROMISES */
-.promises p {
-  margin: 10px 0;
-  font-size: 1.05rem;
-}
-
-/* VALENTINE BUTTONS */
-.buttons {
-  margin-top: 25px;
-  position: relative;
-  height: 60px;
-}
-
-.buttons button {
-  padding: 12px 25px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-#yesBtn {
-  background: #ff5e8a;
-  color: white;
-}
-
-#yesBtn:hover {
-  background: #ff3f73;
-}
-
-#noBtn {
-  background: white;
-  color: #333;
-  position: absolute;
-}
-
-/* AFTER YES MESSAGE */
-#afterYesMessage {
-  margin-top: 25px;
-  font-size: 1.2rem;
-  color: #ffd6e5;
-}
-
-.hidden {
-  display: none;
-}
-
-/* SIGNATURE */
-.signature {
-  margin-top: 100px;
-  font-family: 'Playfair Display', serif;
-}
-
-.signature .name {
-  font-size: 1.4rem;
-  margin-top: 5px;
-}
-
-/* POPUP */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-.popup-content {
-  background: #fff;
-  color: #333;
-  padding: 25px;
-  border-radius: 15px;
-  max-width: 400px;
-  text-align: center;
-  animation: popupFade 0.6s ease;
-}
-
-.popup-content h2 {
-  margin-bottom: 15px;
-  color: #ff5e8a;
-}
-
-.popup-content p {
-  margin-bottom: 15px;
-  line-height: 1.6;
-}
-
-.popup-content button {
-  background: #ff5e8a;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-@keyframes popupFade {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* RESPONSIVE */
-@media (min-width: 600px) {
-  .reason-cards {
-    grid-template-columns: 1fr 1fr;
+function typeEffect() {
+  if (index < text.length) {
+    typewriter.textContent += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, speed);
   }
+}
+typeEffect();
+
+/* SCROLL FADE-IN ANIMATION */
+const sections = document.querySelectorAll(".section");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.15 });
+sections.forEach(section => observer.observe(section));
+
+/* COUNTDOWN TO VALENTINE */
+const countdownEl = document.getElementById("countdown");
+const valentineDate = new Date("Feb 14, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = valentineDate - now;
+
+  if (distance < 0) {
+    countdownEl.textContent = "Happy Valentine’s Day ❤️";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* NO BUTTON RUNS AWAY */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+  const container = document.querySelector(".buttons");
+  const containerRect = container.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const maxX = containerRect.width - btnRect.width;
+  const maxY = containerRect.height - btnRect.height;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+});
+
+/* YES BUTTON ACTION */
+const yesBtn = document.getElementById("yesBtn");
+const afterYesMessage = document.getElementById("afterYesMessage");
+
+yesBtn.addEventListener("click", () => {
+  afterYesMessage.textContent = "I already knew your answer 😌❤️ You just made me the happiest person alive.";
+  afterYesMessage.classList.remove("hidden");
+  launchConfetti();
+});
+
+/* CONFETTI EFFECT */
+function launchConfetti() {
+  const duration = 2000;
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({ particleCount: 6, angle: 60, spread: 55, origin: { x: 0 } });
+    confetti({ particleCount: 6, angle: 120, spread: 55, origin: { x: 1 } });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
 }
