@@ -11,12 +11,10 @@ function typeEffect() {
     setTimeout(typeEffect, speed);
   }
 }
-
 typeEffect();
 
 /* SCROLL FADE-IN ANIMATION */
 const sections = document.querySelectorAll(".section");
-
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -24,7 +22,6 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.15 });
-
 sections.forEach(section => observer.observe(section));
 
 /* COUNTDOWN TO VALENTINE */
@@ -47,13 +44,11 @@ function updateCountdown() {
 
   countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
-
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
 /* NO BUTTON RUNS AWAY */
 const noBtn = document.getElementById("noBtn");
-
 noBtn.addEventListener("mouseover", () => {
   const container = document.querySelector(".buttons");
   const containerRect = container.getBoundingClientRect();
@@ -82,22 +77,12 @@ yesBtn.addEventListener("click", () => {
 
 /* CONFETTI EFFECT */
 function launchConfetti() {
-  const duration = 2 * 1000;
+  const duration = 2000;
   const end = Date.now() + duration;
 
   (function frame() {
-    confetti({
-      particleCount: 5,
-      angle: 60,
-      spread: 55,
-      origin: { x: 0 }
-    });
-    confetti({
-      particleCount: 5,
-      angle: 120,
-      spread: 55,
-      origin: { x: 1 }
-    });
+    confetti({ particleCount: 6, angle: 60, spread: 55, origin: { x: 0 } });
+    confetti({ particleCount: 6, angle: 120, spread: 55, origin: { x: 1 } });
 
     if (Date.now() < end) {
       requestAnimationFrame(frame);
@@ -105,7 +90,7 @@ function launchConfetti() {
   })();
 }
 
-/* POPUP */
+/* POPUP CONTROL */
 const popup = document.getElementById("popup");
 const closePopup = document.getElementById("closePopup");
 
